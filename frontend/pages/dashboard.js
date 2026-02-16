@@ -9,6 +9,7 @@ import Simulator from '../components/Simulator';
 import ThreeDCard from '../components/ThreeDCard';
 import FloatingShape from '../components/FloatingShape';
 import AnimatedLayout from '../components/AnimatedLayout';
+import { RocketIllustration } from '../components/Illustrations';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const TABS = [
@@ -157,7 +158,8 @@ export default function Dashboard() {
                                     <p className="text-gray-500 text-lg">Every step counts. Keep growing!</p>
                                 </div>
 
-                                <div className="relative z-10 hidden md:block">
+                                <div className="relative z-10 hidden md:flex items-center gap-6">
+                                    <RocketIllustration size={120} />
                                     <div className="bg-white/80 backdrop-blur-md px-6 py-3 rounded-2xl shadow-lg border border-indigo-50 flex items-center gap-4 cursor-default transition-transform hover:scale-105">
                                         <div className="bg-orange-100 p-3 rounded-xl">
                                             <span className="text-2xl">🔥</span>

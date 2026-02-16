@@ -7,6 +7,7 @@ import api from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThreeDCard from './ThreeDCard';
 import FloatingShape from './FloatingShape';
+import { RoadmapIllustration } from './Illustrations';
 
 const TASK_ICONS = {
     study: '📖',
@@ -172,14 +173,17 @@ export default function RoadmapView({ studentId }) {
                             </div>
 
                             {/* Stats Badge */}
-                            <div className="flex gap-4">
-                                <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 text-center min-w-[100px]">
-                                    <div className="text-sm text-indigo-200 uppercase font-bold tracking-wider mb-1">Duration</div>
-                                    <div className="text-2xl font-bold">{roadmap.duration_days || 30} Days</div>
-                                </div>
-                                <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 text-center min-w-[100px]">
-                                    <div className="text-sm text-indigo-200 uppercase font-bold tracking-wider mb-1">Milestones</div>
-                                    <div className="text-2xl font-bold">{milestones.length}</div>
+                            <div className="flex items-center gap-4">
+                                <RoadmapIllustration size={160} />
+                                <div className="flex flex-col gap-3">
+                                    <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 text-center min-w-[100px]">
+                                        <div className="text-sm text-indigo-200 uppercase font-bold tracking-wider mb-1">Duration</div>
+                                        <div className="text-2xl font-bold">{roadmap.duration_days || 30} Days</div>
+                                    </div>
+                                    <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 text-center min-w-[100px]">
+                                        <div className="text-sm text-indigo-200 uppercase font-bold tracking-wider mb-1">Milestones</div>
+                                        <div className="text-2xl font-bold">{milestones.length}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

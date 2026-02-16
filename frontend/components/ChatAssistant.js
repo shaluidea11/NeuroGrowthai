@@ -4,6 +4,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import api from '../services/api';
+import { ChatBotIllustration } from './Illustrations';
 
 export default function ChatAssistant({ studentId }) {
     const [messages, setMessages] = useState([
@@ -43,9 +44,12 @@ export default function ChatAssistant({ studentId }) {
     return (
         <div className="flex flex-col h-full">
             {/* Header */}
-            <div className="px-6 py-4 border-b border-gray-100 bg-white/80">
-                <h3 className="font-display font-bold text-clay-text text-lg">💬 AI Study Assistant</h3>
-                <p className="text-xs text-clay-subtext">Powered by NeuroGrowth AI</p>
+            <div className="px-6 py-4 border-b border-gray-100 bg-white/80 flex items-center gap-3">
+                <ChatBotIllustration size={50} />
+                <div>
+                    <h3 className="font-display font-bold text-clay-text text-lg">💬 AI Study Assistant</h3>
+                    <p className="text-xs text-clay-subtext">Powered by NeuroGrowth AI</p>
+                </div>
             </div>
 
             {/* Quick Actions */}

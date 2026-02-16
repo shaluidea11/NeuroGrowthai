@@ -8,6 +8,7 @@ import { authAPI as api } from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThreeDCard from '../components/ThreeDCard';
 import FloatingShape from '../components/FloatingShape';
+import { BrainIllustration } from '../components/Illustrations';
 import Head from 'next/head';
 
 export default function Home() {
@@ -78,13 +79,9 @@ export default function Home() {
                             Master Your <br />
                             <span className="gradient-text">Learning Curve</span>
                         </h1>
-                        <motion.div
-                            className="absolute -top-10 -left-10 text-8xl opacity-10 rotate-12"
-                            animate={{ rotate: [12, -12, 12] }}
-                            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                        >
-                            🧠
-                        </motion.div>
+                        <div className="absolute -top-16 -right-8 pointer-events-none">
+                            <BrainIllustration size={200} />
+                        </div>
                     </div>
 
                     <p className="text-xl text-clay-subtext max-w-lg">
