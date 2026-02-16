@@ -1,10 +1,14 @@
 /**
- * NeuroGrowth AI - Landing / Auth Page (Claymorphism)
+ * NeuroGrowth AI - Landing / Auth Page (Claymorphism + 3D)
  */
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { authAPI as api } from '../services/api';
+import { motion, AnimatePresence } from 'framer-motion';
+import ThreeDCard from '../components/ThreeDCard';
+import FloatingShape from '../components/FloatingShape';
+import Head from 'next/head';
 
 export default function Home() {
     const router = useRouter();
@@ -49,117 +53,151 @@ export default function Home() {
     ];
 
     return (
-        <div className="min-h-screen bg-clay-bg flex flex-col items-center justify-center p-6 relative overflow-hidden">
-            {/* Decorative 3D Blobs */}
-            <div className="absolute top-[-80px] left-[-80px] w-64 h-64 rounded-full bg-gradient-to-br from-indigo-200 to-purple-200 opacity-50 blur-3xl animate-float" />
-            <div className="absolute bottom-[-100px] right-[-60px] w-80 h-80 rounded-full bg-gradient-to-br from-pink-200 to-amber-100 opacity-40 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
-            <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-gradient-to-br from-sky-200 to-cyan-100 opacity-30 blur-2xl animate-float" style={{ animationDelay: '1.5s' }} />
+        <div className="min-h-screen bg-neuro-50 flex items-center justify-center p-4 relative overflow-hidden">
+            <Head>
+                <title>NeuroGrowth AI - Smart Learning</title>
+            </Head>
 
-            {/* Header */}
-            <div className="text-center mb-10 animate-slide-up relative z-10">
-                <div className="inline-flex items-center gap-3 clay-card !p-4 !px-6 mb-6 cursor-default">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-clay-accent to-clay-secondary text-white flex items-center justify-center text-2xl shadow-lg shadow-indigo-200">
-                        🎓
-                    </div>
-                    <span className="text-2xl font-display font-bold gradient-text">NeuroGrowth AI</span>
-                </div>
-                <h1 className="text-4xl md:text-5xl font-display font-bold text-clay-text mb-4 leading-tight">
-                    Deep Learning-powered<br />
-                    <span className="gradient-text">Student Growth</span> Prediction
-                </h1>
-                <p className="text-clay-subtext text-lg max-w-lg mx-auto">
-                    Personalized AI roadmap assistant for smarter studying
-                </p>
+            {/* 3D Floating Background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <FloatingShape color="#6366f1" size={300} top="-10%" left="-5%" delay={0} />
+                <FloatingShape color="#ec4899" size={200} top="40%" left="80%" delay={2} />
+                <FloatingShape color="#10b981" size={150} top="70%" left="10%" delay={4} type="square" />
             </div>
 
-            {/* Feature Pills */}
-            <div className="flex flex-wrap justify-center gap-4 mb-10 animate-slide-up relative z-10" style={{ animationDelay: '0.2s' }}>
-                {features.map((f, i) => (
-                    <div key={i} className="clay-card !p-4 !px-6 flex items-center gap-3 cursor-default hover:scale-105 transition-transform">
-                        <span className="text-2xl">{f.icon}</span>
-                        <div>
-                            <div className="font-semibold text-clay-text text-sm">{f.title}</div>
-                            <div className="text-xs text-clay-subtext">{f.desc}</div>
-                        </div>
+            <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 z-10 items-center">
+                {/* Left Side: 3D Hero */}
+                <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="space-y-8"
+                >
+                    <div className="relative">
+                        <h1 className="text-6xl font-display font-bold text-clay-text leading-tight">
+                            Master Your <br />
+                            <span className="gradient-text">Learning Curve</span>
+                        </h1>
+                        <motion.div
+                            className="absolute -top-10 -left-10 text-8xl opacity-10 rotate-12"
+                            animate={{ rotate: [12, -12, 12] }}
+                            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                            🧠
+                        </motion.div>
                     </div>
-                ))}
-            </div>
 
-            {/* Auth Card */}
-            <div className="w-full max-w-md relative z-10 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-                <div className="clay-card !p-8">
-                    <h2 className="text-2xl font-display font-bold text-clay-text mb-1">
-                        {isLogin ? 'Welcome Back' : 'Get Started'}
-                    </h2>
-                    <p className="text-clay-subtext text-sm mb-6">
-                        {isLogin ? 'Sign in to your dashboard' : 'Create your account'}
+                    <p className="text-xl text-clay-subtext max-w-lg">
+                        AI-powered performance prediction and personalized roadmaps for students who want to excel.
                     </p>
 
-                    {error && (
-                        <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-2xl mb-4 border border-red-100 animate-pop">
-                            {error}
-                        </div>
-                    )}
-
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        {!isLogin && (
-                            <div>
-                                <label className="text-xs font-semibold text-clay-subtext mb-1.5 block uppercase tracking-wide">Name</label>
-                                <input type="text" required className="clay-input"
-                                    value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                                    placeholder="Your full name" />
-                            </div>
-                        )}
-                        <div>
-                            <label className="text-xs font-semibold text-clay-subtext mb-1.5 block uppercase tracking-wide">Email</label>
-                            <input type="email" required className="clay-input"
-                                value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
-                                placeholder="your@email.com" />
-                        </div>
-                        <div>
-                            <label className="text-xs font-semibold text-clay-subtext mb-1.5 block uppercase tracking-wide">Password</label>
-                            <input type="password" required className="clay-input"
-                                value={form.password} onChange={e => setForm({ ...form, password: e.target.value })}
-                                placeholder="••••••••" />
-                        </div>
-
-                        {!isLogin && (
-                            <div className="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label className="text-xs font-semibold text-clay-subtext mb-1.5 block uppercase tracking-wide">Career Goal</label>
-                                    <select className="clay-input !py-3 text-sm"
-                                        value={form.career_goal} onChange={e => setForm({ ...form, career_goal: e.target.value })}>
-                                        {['Software Engineer', 'Data Scientist', 'ML Engineer', 'Web Developer', 'DevOps Engineer'].map(g => (
-                                            <option key={g} value={g}>{g}</option>
-                                        ))}
-                                    </select>
+                    <div className="grid gap-6">
+                        {features.map((f, i) => (
+                            <ThreeDCard key={i} className="cursor-default">
+                                <div className="flex items-center gap-4 bg-white/50 p-4 rounded-xl">
+                                    <span className="text-3xl">{f.icon}</span>
+                                    <div>
+                                        <h3 className="font-bold text-clay-text">{f.title}</h3>
+                                        <p className="text-sm text-clay-subtext">{f.desc}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <label className="text-xs font-semibold text-clay-subtext mb-1.5 block uppercase tracking-wide">Target GPA</label>
-                                    <input type="number" step="0.1" min="1" max="4" className="clay-input !py-3 text-sm"
-                                        value={form.target_gpa} onChange={e => setForm({ ...form, target_gpa: parseFloat(e.target.value) })} />
-                                </div>
-                            </div>
-                        )}
+                            </ThreeDCard>
+                        ))}
+                    </div>
+                </motion.div>
 
-                        <button type="submit" disabled={loading}
-                            className="w-full clay-button-primary !py-4 !text-base !rounded-2xl mt-2">
-                            {loading ? (
-                                <span className="inline-block w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            ) : (
-                                isLogin ? 'Sign In' : 'Create Account'
+                {/* Right Side: 3D Auth Card */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                    <ThreeDCard options={{ max: 10, scale: 1.01 }}>
+                        <div className="bg-white/80 backdrop-blur-xl p-10 rounded-[2.5rem] shadow-2xl border border-white/50 relative overflow-hidden">
+                            {/* Decorative glow */}
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-clay-accent/20 to-clay-secondary/20 blur-2xl rounded-full -mr-10 -mt-10" />
+
+                            <div className="text-center mb-8 relative z-10">
+                                <div className="w-16 h-16 bg-gradient-to-br from-clay-accent to-clay-secondary text-white rounded-2xl flex items-center justify-center text-3xl shadow-lg mx-auto mb-4 animate-bounce-slow">
+                                    🎓
+                                </div>
+                                <h2 className="text-2xl font-display font-bold text-clay-text">
+                                    {isLogin ? 'Welcome Back!' : 'Start Your Journey'}
+                                </h2>
+                                <p className="text-clay-subtext">
+                                    {isLogin ? 'Continue your growth path' : 'Join thousands of ambitious students'}
+                                </p>
+                            </div>
+
+                            {error && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="bg-red-50 text-red-600 text-sm p-3 rounded-xl mb-6 flex items-center gap-2 border border-red-100"
+                                >
+                                    ⚠️ {error}
+                                </motion.div>
                             )}
-                        </button>
-                    </form>
 
-                    <p className="text-center mt-6 text-sm text-clay-subtext">
-                        {isLogin ? "Don't have an account?" : 'Already have an account?'}
-                        <button onClick={() => { setIsLogin(!isLogin); setError(''); }}
-                            className="ml-2 text-clay-accent font-semibold hover:underline">
-                            {isLogin ? 'Register' : 'Sign In'}
-                        </button>
-                    </p>
-                </div>
+                            <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
+                                <AnimatePresence mode='wait'>
+                                    {!isLogin && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="space-y-4 overflow-hidden"
+                                        >
+                                            <input type="text" placeholder="Full Name" className="clay-input" required
+                                                value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
+
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <select className="clay-input" value={form.career_goal} onChange={e => setForm({ ...form, career_goal: e.target.value })}>
+                                                    <option>Software Engineer</option>
+                                                    <option>Data Scientist</option>
+                                                    <option>Product Manager</option>
+                                                    <option>Researcher</option>
+                                                </select>
+                                                <input type="number" step="0.1" placeholder="Target GPA" className="clay-input"
+                                                    value={form.target_gpa} onChange={e => setForm({ ...form, target_gpa: parseFloat(e.target.value) })} />
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+
+                                <motion.div layout>
+                                    <input type="email" placeholder="Email Address" className="clay-input w-full" required
+                                        value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+                                </motion.div>
+
+                                <motion.div layout>
+                                    <input type="password" placeholder="Password" className="clay-input w-full" required
+                                        value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} />
+                                </motion.div>
+
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    type="submit" disabled={loading}
+                                    className="w-full clay-button-primary !py-4 !text-lg !rounded-2xl shadow-xl shadow-indigo-200"
+                                >
+                                    {loading ? (
+                                        <span className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                    ) : (isLogin ? 'Sign In' : 'Create Account')}
+                                </motion.button>
+                            </form>
+
+                            <div className="mt-8 text-center">
+                                <button
+                                    onClick={() => { setIsLogin(!isLogin); setError(''); }}
+                                    className="text-sm font-medium text-clay-subtext hover:text-clay-accent transition-colors underline decoration-dotted"
+                                >
+                                    {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Sign In"}
+                                </button>
+                            </div>
+                        </div>
+                    </ThreeDCard>
+                </motion.div>
             </div>
         </div>
     );
