@@ -1,0 +1,5 @@
+2026-02-16 12:23:06.528 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 12:23:06.531 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 13:52:52.255 | INFO     | services.clustering:cluster_students:103 - ✅ Clustered 20 students into 4 groups
+2026-02-16 13:52:52.337 | INFO     | services.clustering:cluster_students:103 - ✅ Clustered 20 students into 4 groups
+2026-02-16 14:00:06.503 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend

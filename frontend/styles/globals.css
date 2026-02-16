@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base styles ───────────────────────────────────────────── */
+:root {
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #111827;
+  --bg-card: #1a2035;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --accent: #5c7cfa;
+  --accent-glow: rgba(92, 124, 250, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── Glassmorphism ────────────────────────────────────────── */
+.glass {
+  background: rgba(26, 32, 53, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Cards ────────────────────────────────────────────────── */
+.card {
+  @apply glass rounded-2xl p-6 transition-all duration-300;
+}
+
+.card:hover {
+  border-color: rgba(92, 124, 250, 0.3);
+  box-shadow: 0 8px 32px rgba(92, 124, 250, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ─── Gauge ────────────────────────────────────────────────── */
+.gauge-ring {
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Glow effects ─────────────────────────────────────────── */
+.glow-green { box-shadow: 0 0 15px rgba(16, 185, 129, 0.3); }
+.glow-red { box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); }
+.glow-amber { box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); }
+.glow-blue { box-shadow: 0 0 15px rgba(92, 124, 250, 0.3); }
+
+/* ─── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: #374151; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+
+/* ─── Chat ─────────────────────────────────────────────────── */
+.chat-bubble {
+  @apply rounded-2xl px-4 py-3 max-w-[80%] text-sm leading-relaxed;
+}
+
+.chat-user {
+  @apply bg-neuro-600 text-white ml-auto rounded-br-sm;
+}
+
+.chat-bot {
+  @apply glass rounded-bl-sm;
+}
+
+/* ─── Gradient text ────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #5c7cfa, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Animations ───────────────────────────────────────────── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-slide-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.animate-slide-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
+.animate-slide-up-delay-3 { animation-delay: 0.3s; opacity: 0; }
+.animate-slide-up-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+/* ─── Sidebar ──────────────────────────────────────────────── */
+.sidebar-link {
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 
+         hover:bg-white/5 hover:text-white transition-all duration-200;
+}
+
+.sidebar-link.active {
+  @apply bg-neuro-600/20 text-neuro-400;
+}
+
+/* ─── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .card { @apply p-4; }
+}
