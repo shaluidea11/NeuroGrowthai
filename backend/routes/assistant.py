@@ -136,6 +136,23 @@ def dashboard(student_id: int, db: Session = Depends(get_db)):
     ]
     cluster_info = get_student_cluster(log_dicts, {})
 
+    # Calculate streak (consecutive days with logs)
+    from datetime import date as dt_date, timedelta
+    all_log_dates = set(
+        row[0] for row in
+        db.query(DailyLog.date)
+        .filter(DailyLog.student_id == student_id)
+        .all()
+    )
+    streak = 0
+    check_date = dt_date.today()
+    # Allow starting from today or yesterday
+    if check_date not in all_log_dates:
+        check_date = check_date - timedelta(days=1)
+    while check_date in all_log_dates:
+        streak += 1
+        check_date -= timedelta(days=1)
+
     return {
         "student": {
             "id": student.id,
@@ -148,6 +165,7 @@ def dashboard(student_id: int, db: Session = Depends(get_db)):
         "prediction": prediction_data,
         "roadmap": latest_roadmap.roadmap_json if latest_roadmap else None,
         "learning_style": cluster_info,
+        "streak": streak,
         "stats": {
             "total_logs": db.query(DailyLog).filter(DailyLog.student_id == student_id).count(),
             "avg_study_hours": round(float(

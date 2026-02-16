@@ -156,3 +156,213 @@
 2026-02-16 15:41:08.454 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
 2026-02-16 15:41:08.464 | INFO     | services.roadmap_engine:generate_roadmap:31 - Generating roadmap: score=50.0, goal=DevOps Engineer, style=Consistent Learner
 2026-02-16 15:41:08.514 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:43:51.348 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:43:51.357 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:43:51.365 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:43:51.379 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:43:51.392 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:43:51.420 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:43:51.426 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:43:51.454 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:51:16.784 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:51:16.794 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:51:16.798 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:51:16.805 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:51:16.811 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:51:16.830 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:51:16.836 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:51:16.855 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:52:09.702 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:52:09.711 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:52:09.717 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:52:09.733 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:52:09.751 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:52:09.786 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:52:09.793 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:52:09.830 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:53:50.759 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:53:50.775 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:53:50.783 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:53:50.801 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:53:57.591 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:53:57.605 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:53:57.613 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:53:57.627 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:54:03.474 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:54:03.485 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:54:03.494 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:54:03.510 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:55:56.212 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:55:56.228 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:56:19.528 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 15:56:19.536 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 15:56:19.612 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:57:04.223 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:57:04.233 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:57:04.251 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:57:04.277 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:57:04.336 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 15:57:04.344 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 15:57:04.410 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:57:48.034 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:57:48.043 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:57:48.058 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:57:48.085 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:57:48.135 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 15:57:48.143 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 15:57:48.220 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:58:57.279 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 15:58:57.283 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 15:58:57.301 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:59:32.711 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:59:32.719 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:59:32.723 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:59:32.733 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:01:39.267 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:01:39.275 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:03:15.151 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:03:15.159 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:05:46.660 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:05:46.663 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:07:52.970 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:07:52.977 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:09:42.122 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:09:42.131 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:09:42.138 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:09:42.144 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:10:08.429 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 16:10:08.434 | INFO     | services.roadmap_engine:generate_roadmap:31 - Generating roadmap: score=-31.5, goal=DevOps Engineer, style=Consistent Learner
+2026-02-16 16:10:08.447 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:17:02.090 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:17:02.094 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:17:02.103 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:17:02.111 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:17:02.156 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:17:02.159 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:17:02.177 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:12.706 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:18:12.713 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:12.720 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:18:12.727 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:12.732 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:18:12.751 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:12.756 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:18:12.778 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:12.782 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:18:12.789 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:18:12.827 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:12.831 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:18:12.836 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:18:12.866 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:19.025 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:18:19.031 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:19.036 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:18:19.047 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:32.595 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:18:32.604 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:32.608 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:18:32.614 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:18:32.616 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:32.641 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:32.645 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:18:32.651 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:18:32.666 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:18:32.673 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:32.728 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:32.732 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:18:32.737 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:18:32.766 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:37.262 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:18:37.270 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:18:37.278 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:18:37.285 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:22:02.523 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:22:02.565 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:22:02.590 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:22:02.621 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:22:02.628 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:22:02.664 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:22:02.670 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:22:02.702 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:22:02.708 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:22:02.720 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:22:02.815 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:22:02.823 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:22:02.833 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:22:02.908 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:22:06.375 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:22:06.390 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:22:06.396 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:22:06.410 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:26:53.376 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:26:53.385 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:26:53.401 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:26:53.430 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:26:53.519 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:26:53.524 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:26:53.607 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:28:12.000 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:28:12.012 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:28:12.019 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:28:12.033 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:28:12.036 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:28:12.077 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:28:12.084 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:28:12.098 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:28:12.128 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:28:12.133 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:28:12.240 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:28:12.246 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:28:12.258 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 16:28:12.328 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:28:22.665 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:28:22.682 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:28:22.688 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:28:22.705 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:29:13.669 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:29:13.687 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:29:13.695 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:29:13.714 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:37:56.374 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 16:38:12.927 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 16:38:12.930 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 16:39:23.499 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 16:39:39.789 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 16:39:39.793 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 16:39:39.804 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:39:39.835 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:39:39.853 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:39:39.895 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:39:39.914 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:39:40.008 | INFO     | models.inference:load_model:30 - ✅ Model loaded from disk
+2026-02-16 16:39:40.146 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:42:23.414 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:42:23.433 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:42:47.531 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:42:47.551 | INFO     | models.inference:load_model:30 - ✅ Model loaded from disk
+2026-02-16 16:42:47.578 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:42:57.410 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 16:43:14.134 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 16:43:14.141 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 16:43:41.994 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:43:42.101 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:43:42.109 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 16:43:42.124 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:43:42.130 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:43:42.214 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:43:42.220 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 16:43:42.230 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:43:42.282 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:43:42.345 | INFO     | models.inference:load_model:30 - ✅ Model loaded from disk
+2026-02-16 16:43:42.527 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:43:42.536 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/3
+2026-02-16 16:43:42.582 | INFO     | models.inference:load_model:30 - ✅ Model loaded from disk
+2026-02-16 16:43:42.671 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:43:52.888 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:43:52.913 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:43:52.920 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:43:52.937 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:44:08.188 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:44:08.200 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 16:44:08.210 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 16:44:08.225 | INFO     | main:log_requests:46 - Response status: 200

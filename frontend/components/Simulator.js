@@ -28,8 +28,9 @@ export default function Simulator({ studentId, prediction }) {
                 }
             });
             setResult(data);
-        } catch {
-            alert('Simulation failed');
+        } catch (err) {
+            console.error('Simulation error:', err);
+            alert(err.response?.data?.detail || 'Simulation failed. Please try again.');
         } finally {
             setLoading(false);
         }

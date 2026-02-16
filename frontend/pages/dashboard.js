@@ -166,7 +166,7 @@ export default function Dashboard() {
                                         </div>
                                         <div>
                                             <div className="text-xs text-gray-400 font-bold uppercase tracking-wider">Current Streak</div>
-                                            <div className="text-xl font-bold text-gray-900">12 Days</div>
+                                            <div className="text-xl font-bold text-gray-900">{dashboard?.streak ?? 0} Days</div>
                                         </div>
                                     </div>
                                 </div>

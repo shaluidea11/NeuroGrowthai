@@ -28,8 +28,10 @@ export default function ChatAssistant({ studentId }) {
         try {
             const { data } = await api.chatAssistant({ student_id: studentId, message: text });
             setMessages(prev => [...prev, { role: 'bot', text: data.response }]);
-        } catch {
-            setMessages(prev => [...prev, { role: 'bot', text: "Sorry, I couldn't process that. Please try again." }]);
+        } catch (err) {
+            console.error('Chat error:', err);
+            const detail = err.response?.data?.detail || "Sorry, I couldn't process that. Please try again.";
+            setMessages(prev => [...prev, { role: 'bot', text: detail }]);
         } finally {
             setLoading(false);
         }
