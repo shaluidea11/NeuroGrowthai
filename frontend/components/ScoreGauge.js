@@ -1,39 +1,33 @@
 /**
- * Score Gauge Component - Radial gauge for predicted score
+ * Score Gauge Component (Claymorphism)
  */
 
 export default function ScoreGauge({ score }) {
-    const normalizedScore = Math.max(0, Math.min(100, score || 0));
-    const circumference = 2 * Math.PI * 54;
-    const offset = circumference - (normalizedScore / 100) * circumference;
-
-    const getColor = (s) => {
-        if (s >= 80) return '#10B981';
-        if (s >= 60) return '#5c7cfa';
-        if (s >= 40) return '#F59E0B';
-        return '#EF4444';
-    };
-
-    const color = getColor(normalizedScore);
+    const radius = 60;
+    const stroke = 12;
+    const circumference = 2 * Math.PI * radius;
+    const progress = (score / 100) * circumference;
+    const color = score >= 75 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444';
 
     return (
-        <div className="flex flex-col items-center">
-            <div className="relative w-32 h-32">
-                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
-                    {/* Background ring */}
-                    <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="8" />
-                    {/* Score ring */}
-                    <circle cx="60" cy="60" r="54" fill="none" stroke={color} strokeWidth="8"
-                        strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset}
-                        className="gauge-ring" style={{ filter: `drop-shadow(0 0 6px ${color}60)` }} />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-2xl font-bold" style={{ color }}>{normalizedScore.toFixed(0)}</span>
-                    <span className="text-xs text-gray-500">/100</span>
-                </div>
-            </div>
-            <div className="mt-2 text-xs text-gray-400">
-                {normalizedScore >= 80 ? '🌟 Excellent' : normalizedScore >= 60 ? '👍 Good' : normalizedScore >= 40 ? '⚠️ Needs Work' : '🔴 At Risk'}
+        <div className="relative flex items-center justify-center">
+            <svg width="160" height="160" className="drop-shadow-lg">
+                {/* Background circle */}
+                <circle cx="80" cy="80" r={radius} fill="none"
+                    stroke="#e2e8f0" strokeWidth={stroke} />
+                {/* Progress circle */}
+                <circle cx="80" cy="80" r={radius} fill="none"
+                    stroke={color} strokeWidth={stroke}
+                    strokeDasharray={circumference}
+                    strokeDashoffset={circumference - progress}
+                    strokeLinecap="round"
+                    transform="rotate(-90 80 80)"
+                    className="transition-all duration-1000 ease-out"
+                    style={{ filter: `drop-shadow(0 0 6px ${color}40)` }} />
+            </svg>
+            <div className="absolute text-center">
+                <div className="text-3xl font-display font-bold text-clay-text">{Math.round(score)}</div>
+                <div className="text-xs text-clay-subtext font-medium">/ 100</div>
             </div>
         </div>
     );

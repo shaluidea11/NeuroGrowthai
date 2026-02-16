@@ -1,52 +1,47 @@
 /**
- * Feature Importance (SHAP) Visualization Component
+ * Feature Importance Component (Claymorphism)
  */
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
-const COLORS = ['#5c7cfa', '#8B5CF6', '#10B981', '#F59E0B', '#EF4444', '#3B82F6', '#EC4899', '#06B6D4'];
-
-const LABELS = {
-    study_hours: '📚 Study Hours',
-    topics_completed: '📖 Topics Done',
-    problems_solved: '🧩 Problems Solved',
-    mock_score: '📝 Mock Score',
-    confidence: '💪 Confidence',
-    mood: '😊 Mood',
-    revision_done: '🔄 Revision',
-    skill_practiced: '🎯 Skill',
-};
+const COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#0ea5e9', '#ef4444'];
 
 export default function FeatureImportance({ data }) {
-    if (!data) return null;
-
-    const chartData = Object.entries(data)
-        .map(([key, value]) => ({
-            feature: LABELS[key] || key,
-            importance: parseFloat((value * 100).toFixed(1)),
+    const chartData = Object.entries(data || {})
+        .map(([name, value]) => ({
+            name: name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+            value: Math.abs(value),
+            raw: value,
         }))
-        .sort((a, b) => b.importance - a.importance);
+        .sort((a, b) => b.value - a.value)
+        .slice(0, 7);
+
+    if (chartData.length === 0) {
+        return <div className="text-center py-8 text-clay-subtext">No feature data available</div>;
+    }
+
+    const CustomTooltip = ({ active, payload }) => {
+        if (!active || !payload?.length) return null;
+        return (
+            <div className="bg-white rounded-xl p-3 text-xs shadow-lg border border-gray-100">
+                <div className="font-semibold text-clay-text">{payload[0].payload.name}</div>
+                <div className="text-clay-subtext">Impact: <span className="font-medium text-clay-accent">{payload[0].payload.raw?.toFixed(3)}</span></div>
+            </div>
+        );
+    };
 
     return (
-        <div>
-            <p className="text-xs text-gray-400 mb-4">
-                Shows which features had the most impact on your score prediction
-            </p>
-            <ResponsiveContainer width="100%" height={280}>
-                <BarChart data={chartData} layout="vertical" margin={{ left: 20 }}>
-                    <XAxis type="number" stroke="#6b7280" tick={{ fontSize: 11 }} />
-                    <YAxis dataKey="feature" type="category" stroke="#6b7280" tick={{ fontSize: 11 }} width={130} />
-                    <Tooltip
-                        contentStyle={{ background: '#1a2035', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px' }}
-                        formatter={(v) => [`${v}%`, 'Impact']}
-                    />
-                    <Bar dataKey="importance" radius={[0, 6, 6, 0]}>
-                        {chartData.map((_, i) => (
-                            <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                        ))}
-                    </Bar>
-                </BarChart>
-            </ResponsiveContainer>
-        </div>
+        <ResponsiveContainer width="100%" height={250}>
+            <BarChart data={chartData} layout="vertical" margin={{ left: 20 }}>
+                <XAxis type="number" stroke="#94a3b8" tick={{ fontSize: 10 }} />
+                <YAxis type="category" dataKey="name" stroke="#94a3b8" tick={{ fontSize: 11 }} width={100} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" radius={[0, 8, 8, 0]}>
+                    {chartData.map((_, i) => (
+                        <Cell key={i} fill={COLORS[i % COLORS.length]} opacity={0.85} />
+                    ))}
+                </Bar>
+            </BarChart>
+        </ResponsiveContainer>
     );
 }

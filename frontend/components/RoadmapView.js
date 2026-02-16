@@ -1,118 +1,117 @@
 /**
- * Roadmap Display Component
+ * Roadmap View Component (Claymorphism)
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import api from '../services/api';
 
-export default function RoadmapView({ roadmap }) {
-    const [selectedWeek, setSelectedWeek] = useState(1);
+export default function RoadmapView({ studentId }) {
+    const [roadmap, setRoadmap] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [selectedWeek, setSelectedWeek] = useState(0);
 
-    if (!roadmap) return null;
+    useEffect(() => {
+        const fetchRoadmap = async () => {
+            try {
+                const { data } = await api.getRoadmap(studentId);
+                setRoadmap(data);
+            } catch {
+                try {
+                    const { data } = await api.generateRoadmap(studentId);
+                    setRoadmap(data);
+                } catch { }
+            } finally {
+                setLoading(false);
+            }
+        };
+        if (studentId) fetchRoadmap();
+    }, [studentId]);
 
-    const weekDays = (roadmap.daily_plan || []).filter(d => d.week === selectedWeek);
+    if (loading) {
+        return (
+            <div className="text-center py-12">
+                <div className="w-10 h-10 border-3 border-clay-bg border-t-clay-accent rounded-full animate-spin mx-auto mb-3" />
+                <p className="text-clay-subtext text-sm">Loading your roadmap...</p>
+            </div>
+        );
+    }
+
+    if (!roadmap) {
+        return (
+            <div className="text-center py-12">
+                <div className="text-4xl mb-3">🗺️</div>
+                <p className="text-clay-subtext">No roadmap generated yet.</p>
+            </div>
+        );
+    }
+
+    const weeks = [];
+    const daily = roadmap.daily_tasks || [];
+    for (let i = 0; i < daily.length; i += 7) {
+        weeks.push(daily.slice(i, i + 7));
+    }
 
     return (
-        <div className="space-y-6">
-            {/* Summary */}
-            <div className="card bg-gradient-to-br from-neuro-900/50 to-purple-900/30">
-                <h3 className="text-lg font-semibold mb-2">📋 Your 30-Day Roadmap</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">{roadmap.summary}</p>
-                <div className="flex gap-4 mt-4 text-xs">
-                    <span className="px-3 py-1 rounded-full bg-neuro-600/20 text-neuro-400">
-                        Intensity: {roadmap.intensity_level}
+        <div>
+            <div className="flex items-center gap-3 mb-6">
+                <h3 className="font-display font-bold text-clay-text text-xl">🗺️ Your 30-Day Roadmap</h3>
+                {roadmap.learning_style && (
+                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-clay-accent/10 text-clay-accent">
+                        {roadmap.learning_style}
                     </span>
-                    <span className="px-3 py-1 rounded-full bg-purple-600/20 text-purple-400">
-                        Style: {roadmap.learning_style}
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-white/5 text-gray-400">
-                        {roadmap.start_date} → {roadmap.end_date}
-                    </span>
-                </div>
+                )}
             </div>
 
             {/* Week Selector */}
-            <div className="flex gap-2">
-                {[1, 2, 3, 4].map(w => (
-                    <button key={w} onClick={() => setSelectedWeek(w)}
-                        className={`flex-1 py-3 rounded-xl text-sm font-medium transition ${selectedWeek === w
-                                ? 'bg-neuro-600 text-white shadow-lg shadow-neuro-600/30'
-                                : 'glass text-gray-400 hover:text-white'
-                            }`}>
-                        Week {w}
+            <div className="flex gap-2 mb-6">
+                {weeks.map((_, i) => (
+                    <button key={i}
+                        onClick={() => setSelectedWeek(i)}
+                        className={`px-5 py-2.5 rounded-2xl text-sm font-medium transition-all ${selectedWeek === i
+                                ? 'bg-clay-accent text-white shadow-lg shadow-indigo-200'
+                                : 'bg-clay-bg text-clay-subtext'
+                            }`}
+                        style={selectedWeek !== i ? { boxShadow: '4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff' } : {}}>
+                        Week {i + 1}
                     </button>
                 ))}
             </div>
 
             {/* Daily Tasks */}
             <div className="space-y-3">
-                {weekDays.map(day => (
-                    <div key={day.day} className="card">
-                        <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-lg bg-neuro-600/20 flex items-center justify-center text-sm font-bold text-neuro-400">
-                                    {day.day}
-                                </div>
-                                <div>
-                                    <div className="font-medium text-sm">Day {day.day}</div>
-                                    <div className="text-xs text-gray-500">Focus: {day.focus_area}</div>
-                                </div>
-                            </div>
-                            <div className="text-xs text-gray-400">
-                                {day.study_hours}h | {day.problems_target} problems
-                            </div>
+                {(weeks[selectedWeek] || []).map((day, i) => (
+                    <div key={i} className="flex gap-4 items-start p-4 rounded-2xl bg-clay-bg/60 transition-all hover:bg-clay-bg"
+                        style={{ boxShadow: 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff' }}>
+                        <div className="w-10 h-10 rounded-xl bg-clay-accent/10 text-clay-accent flex items-center justify-center font-bold text-sm shrink-0">
+                            D{selectedWeek * 7 + i + 1}
                         </div>
-                        <div className="space-y-2">
-                            {(day.tasks || []).map((task, i) => (
-                                <div key={i} className="flex items-center gap-3 text-sm">
-                                    <span className="text-xs text-gray-500 w-20">{task.time}</span>
-                                    <span className={`w-2 h-2 rounded-full ${task.type === 'study' ? 'bg-neuro-400' :
-                                            task.type === 'practice' ? 'bg-accent-green' :
-                                                task.type === 'revision' ? 'bg-accent-amber' :
-                                                    task.type === 'skill' ? 'bg-accent-purple' :
-                                                        'bg-gray-500'
-                                        }`} />
-                                    <span className="text-gray-300">{task.task}</span>
-                                </div>
-                            ))}
+                        <div className="flex-1">
+                            <div className="font-semibold text-clay-text text-sm">{day.focus || 'Study Session'}</div>
+                            {day.tasks && (
+                                <ul className="mt-2 space-y-1">
+                                    {day.tasks.map((t, j) => (
+                                        <li key={j} className="text-xs text-clay-subtext flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-clay-accent/40" />
+                                            {t}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
+                        <span className="text-xs text-clay-subtext bg-white px-2 py-1 rounded-lg">{day.hours || 4}h</span>
                     </div>
                 ))}
             </div>
 
-            {/* Mock Test Schedule */}
-            {roadmap.mock_test_schedule && (
-                <div className="card">
-                    <h4 className="font-semibold mb-3">📝 Mock Test Schedule</h4>
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                        {roadmap.mock_test_schedule.map((test, i) => (
-                            <div key={i} className="glass-light rounded-xl p-3 text-center">
-                                <div className="text-xs text-gray-400">Week {test.week}</div>
-                                <div className="font-medium text-sm mt-1">{test.type}</div>
-                                <div className="text-xs text-gray-500 mt-1">{test.duration_minutes} min</div>
-                                <div className="text-xs text-neuro-400 mt-1">{test.date}</div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {/* Milestones */}
-            {roadmap.weekly_milestones && (
-                <div className="card">
-                    <h4 className="font-semibold mb-3">🏆 Weekly Milestones</h4>
-                    <div className="space-y-3">
-                        {roadmap.weekly_milestones.map((m, i) => (
-                            <div key={i} className="flex items-start gap-3">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${selectedWeek > m.week ? 'bg-accent-green/20 text-accent-green' :
-                                        selectedWeek === m.week ? 'bg-neuro-600/20 text-neuro-400' :
-                                            'bg-white/5 text-gray-500'
-                                    }`}>
-                                    {selectedWeek > m.week ? '✓' : m.week}
-                                </div>
-                                <div className="flex-1">
-                                    <div className="text-sm font-medium">{m.target}</div>
-                                    <div className="text-xs text-gray-400">Focus: {m.focus} | {m.deliverable}</div>
-                                </div>
+            {/* Mock Tests */}
+            {roadmap.mock_tests?.length > 0 && (
+                <div className="mt-8">
+                    <h4 className="font-display font-bold text-clay-text mb-3">📝 Scheduled Mock Tests</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        {roadmap.mock_tests.map((m, i) => (
+                            <div key={i} className="text-center p-4 rounded-2xl bg-gradient-to-br from-clay-accent/5 to-clay-secondary/5 border border-clay-accent/10">
+                                <div className="text-sm font-bold text-clay-accent">Day {m.day || (i + 1) * 7}</div>
+                                <div className="text-xs text-clay-subtext mt-1">{m.topic || 'Full Mock'}</div>
                             </div>
                         ))}
                     </div>

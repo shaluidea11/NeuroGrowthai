@@ -1,231 +1,175 @@
+/**
+ * NeuroGrowth AI - Student Dashboard (Claymorphism)
+ */
+
 import { useState, useEffect } from 'react';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { dashboardAPI, predictionAPI, logsAPI, roadmapAPI, assistantAPI } from '../services/api';
+import api from '../services/api';
 import Sidebar from '../components/Sidebar';
 import GrowthChart from '../components/GrowthChart';
 import ScoreGauge from '../components/ScoreGauge';
 import BurnoutIndicator from '../components/BurnoutIndicator';
 import DailyLogForm from '../components/DailyLogForm';
-import RoadmapView from '../components/RoadmapView';
 import ChatAssistant from '../components/ChatAssistant';
+import RoadmapView from '../components/RoadmapView';
 import Simulator from '../components/Simulator';
 import FeatureImportance from '../components/FeatureImportance';
 
+const TABS = [
+    { id: 'overview', icon: '🏠', label: '🏠 Overview' },
+    { id: 'log', icon: '📝', label: '📝 Daily Log' },
+    { id: 'roadmap', icon: '🗺️', label: '🗺️ Roadmap' },
+    { id: 'chat', icon: '💬', label: '💬 Assistant' },
+    { id: 'simulator', icon: '🧪', label: '🧪 Simulator' },
+];
+
 export default function Dashboard() {
     const router = useRouter();
+    const [tab, setTab] = useState('overview');
     const [user, setUser] = useState(null);
-    const [data, setData] = useState(null);
+    const [dashboard, setDashboard] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [activeTab, setActiveTab] = useState('overview');
 
     useEffect(() => {
-        const u = JSON.parse(localStorage.getItem('user') || 'null');
-        if (!u) { router.push('/'); return; }
-        setUser(u);
-        fetchDashboard(u.id);
+        const token = localStorage.getItem('token');
+        if (!token) { router.push('/'); return; }
+
+        const fetchData = async () => {
+            try {
+                const { data: me } = await api.getMe();
+                setUser(me);
+                if (me.role === 'admin') { router.push('/admin'); return; }
+                const { data: dash } = await api.getDashboard(me.id);
+                setDashboard(dash);
+            } catch {
+                localStorage.removeItem('token');
+                router.push('/');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
     }, []);
 
-    const fetchDashboard = async (id) => {
-        try {
-            const res = await dashboardAPI.get(id);
-            setData(res.data);
-        } catch (err) {
-            console.error('Dashboard fetch failed:', err);
-        }
-        setLoading(false);
-    };
-
-    const handlePredict = async () => {
-        if (!user) return;
-        try {
-            const res = await predictionAPI.predict(user.id);
-            setData(prev => ({ ...prev, prediction: res.data }));
-        } catch (err) { console.error(err); }
-    };
-
-    const handleGenerateRoadmap = async () => {
-        if (!user) return;
-        try {
-            const res = await roadmapAPI.generate({
-                student_id: user.id,
-                weak_areas: ['DSA', 'Math', 'ML'],
-            });
-            setData(prev => ({ ...prev, roadmap: res.data.roadmap }));
-        } catch (err) { console.error(err); }
-    };
-
-    const handleLogSubmit = async () => {
-        await fetchDashboard(user.id);
-        setActiveTab('overview');
-    };
-
-    const logout = () => {
+    const handleLogout = () => {
         localStorage.removeItem('token');
-        localStorage.removeItem('user');
         router.push('/');
     };
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <div className="text-5xl mb-4 animate-float">🎓</div>
-                    <div className="text-xl gradient-text font-semibold">Loading NeuroGrowth AI...</div>
+            <div className="min-h-screen bg-clay-bg flex items-center justify-center">
+                <div className="clay-card !p-10 text-center animate-pop">
+                    <div className="w-16 h-16 border-4 border-clay-bg border-t-clay-accent rounded-full animate-spin mx-auto mb-4" />
+                    <p className="text-clay-subtext font-medium">Loading your dashboard...</p>
                 </div>
             </div>
         );
     }
 
-    const tabs = [
-        { id: 'overview', label: '📊 Overview', icon: '📊' },
-        { id: 'log', label: '📝 Log Progress', icon: '📝' },
-        { id: 'roadmap', label: '🗺️ Roadmap', icon: '🗺️' },
-        { id: 'chat', label: '🤖 AI Assistant', icon: '🤖' },
-        { id: 'simulator', label: '⚡ Simulator', icon: '⚡' },
-    ];
+    const prediction = dashboard?.prediction;
+    const logs = dashboard?.logs || [];
 
     return (
-        <>
-            <Head>
-                <title>Dashboard — NeuroGrowth AI</title>
-            </Head>
+        <div className="min-h-screen bg-clay-bg">
+            <Sidebar tabs={TABS} activeTab={tab} onTabChange={setTab} user={user} onLogout={handleLogout} />
 
-            <div className="flex min-h-screen">
-                <Sidebar user={user} activeTab={activeTab} tabs={tabs} onTabChange={setActiveTab} onLogout={logout} />
+            <main className="lg:ml-72 px-6 py-8 max-w-7xl mx-auto">
+                {/* Header */}
+                <div className="mb-8">
+                    <h1 className="text-3xl font-display font-bold text-clay-text">
+                        Hello, <span className="gradient-text">{user?.name?.split(' ')[0]}</span> 👋
+                    </h1>
+                    <p className="text-clay-subtext mt-1">Here's your learning progress today</p>
+                </div>
 
-                <main className="flex-1 p-6 lg:p-8 ml-0 lg:ml-64">
-                    {/* Header */}
-                    <div className="flex items-center justify-between mb-8">
-                        <div>
-                            <h1 className="text-2xl font-bold">
-                                {activeTab === 'overview' && '📊 Performance Overview'}
-                                {activeTab === 'log' && '📝 Log Daily Progress'}
-                                {activeTab === 'roadmap' && '🗺️ Your Roadmap'}
-                                {activeTab === 'chat' && '🤖 AI Assistant'}
-                                {activeTab === 'simulator' && '⚡ Performance Simulator'}
-                            </h1>
-                            <p className="text-gray-400 text-sm mt-1">
-                                Welcome back, {user?.name}
-                                {data?.learning_style?.style && (
-                                    <span className="ml-2 px-2 py-0.5 rounded-full text-xs"
-                                        style={{ background: data.learning_style.style.color + '20', color: data.learning_style.style.color }}>
-                                        {data.learning_style.style.name}
-                                    </span>
-                                )}
-                            </p>
+                {/* Overview Tab */}
+                {tab === 'overview' && (
+                    <div className="space-y-6 animate-slide-up">
+                        {/* Top Stats Row */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="clay-card flex flex-col items-center py-8">
+                                <ScoreGauge score={prediction?.predicted_score || 0} />
+                                <div className="mt-4 text-sm font-semibold text-clay-subtext">Predicted Score</div>
+                            </div>
+
+                            <div className="clay-card flex flex-col items-center py-8">
+                                <BurnoutIndicator level={prediction?.burnout_risk || 'low'} />
+                            </div>
+
+                            <div className="clay-card py-8 px-6">
+                                <h3 className="font-display font-bold text-clay-text mb-4 text-center">Quick Stats</h3>
+                                <div className="space-y-4">
+                                    {[
+                                        { label: 'Total Logs', value: logs.length, icon: '📝', color: 'text-clay-accent' },
+                                        { label: 'Avg Study Hrs', value: logs.length ? (logs.reduce((s, l) => s + l.study_hours, 0) / logs.length).toFixed(1) : '0', icon: '⏱️', color: 'text-accent-amber' },
+                                        { label: 'Career Goal', value: user?.career_goal || 'Not set', icon: '🎯', color: 'text-accent-green' },
+                                    ].map((s, i) => (
+                                        <div key={i} className="flex items-center gap-3 p-3 rounded-2xl bg-clay-bg" style={{ boxShadow: 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff' }}>
+                                            <span className="text-xl">{s.icon}</span>
+                                            <div className="flex-1">
+                                                <div className="text-xs text-clay-subtext">{s.label}</div>
+                                                <div className={`font-bold text-sm ${s.color}`}>{s.value}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex gap-3">
-                            <button onClick={handlePredict}
-                                className="bg-neuro-600/20 text-neuro-400 px-4 py-2 rounded-xl text-sm hover:bg-neuro-600/30 transition">
-                                🔮 Predict
-                            </button>
-                            <button onClick={handleGenerateRoadmap}
-                                className="bg-purple-600/20 text-purple-400 px-4 py-2 rounded-xl text-sm hover:bg-purple-600/30 transition">
-                                🗺️ Generate Roadmap
-                            </button>
+
+                        {/* Growth Chart */}
+                        <div className="clay-card">
+                            <h3 className="font-display font-bold text-clay-text mb-4 text-lg">📈 Growth Trajectory</h3>
+                            <GrowthChart logs={logs} />
+                        </div>
+
+                        {/* Feature Importance */}
+                        {prediction?.feature_importance && (
+                            <div className="clay-card">
+                                <h3 className="font-display font-bold text-clay-text mb-4 text-lg">🧠 What Matters Most</h3>
+                                <FeatureImportance data={prediction.feature_importance} />
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Daily Log Tab */}
+                {tab === 'log' && (
+                    <div className="max-w-2xl mx-auto animate-slide-up">
+                        <div className="clay-card !p-8">
+                            <h3 className="font-display font-bold text-clay-text text-xl mb-6">📝 Log Today's Progress</h3>
+                            <DailyLogForm studentId={user?.id} onSuccess={() => window.location.reload()} />
                         </div>
                     </div>
+                )}
 
-                    {/* Overview Tab */}
-                    {activeTab === 'overview' && (
-                        <div className="space-y-6 animate-slide-up">
-                            {/* Top Stats */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                                <div className="card">
-                                    <div className="text-sm text-gray-400 mb-1">Predicted Score</div>
-                                    <div className="text-3xl font-bold gradient-text">
-                                        {data?.prediction?.predicted_score?.toFixed(1) || '—'}
-                                    </div>
-                                    <div className="text-xs text-gray-500 mt-1">out of 100</div>
-                                </div>
-                                <div className="card">
-                                    <div className="text-sm text-gray-400 mb-1">Improvement Velocity</div>
-                                    <div className="text-3xl font-bold text-accent-green">
-                                        {data?.prediction?.improvement_velocity > 0 ? '+' : ''}{data?.prediction?.improvement_velocity?.toFixed(1) || '0'}
-                                    </div>
-                                    <div className="text-xs text-gray-500 mt-1">pts/day trend</div>
-                                </div>
-                                <div className="card">
-                                    <div className="text-sm text-gray-400 mb-1">Avg Study Hours</div>
-                                    <div className="text-3xl font-bold text-neuro-400">{data?.stats?.avg_study_hours || 0}</div>
-                                    <div className="text-xs text-gray-500 mt-1">hrs/day</div>
-                                </div>
-                                <div className="card">
-                                    <div className="text-sm text-gray-400 mb-1">Total Logs</div>
-                                    <div className="text-3xl font-bold text-accent-purple">{data?.stats?.total_logs || 0}</div>
-                                    <div className="text-xs text-gray-500 mt-1">days tracked</div>
-                                </div>
-                            </div>
-
-                            {/* Charts Row */}
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                                <div className="lg:col-span-2 card">
-                                    <h3 className="text-lg font-semibold mb-4">📈 Growth Trajectory</h3>
-                                    <GrowthChart logs={data?.daily_logs || []} />
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="card">
-                                        <h3 className="text-sm font-semibold mb-3">🎯 Score Prediction</h3>
-                                        <ScoreGauge score={data?.prediction?.predicted_score || 0} />
-                                    </div>
-                                    <div className="card">
-                                        <h3 className="text-sm font-semibold mb-3">🔥 Burnout Risk</h3>
-                                        <BurnoutIndicator risk={data?.prediction?.burnout_risk || 0} />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Feature Importance */}
-                            {data?.prediction?.feature_importance && (
-                                <div className="card">
-                                    <h3 className="text-lg font-semibold mb-4">🧠 Feature Impact (SHAP)</h3>
-                                    <FeatureImportance data={data.prediction.feature_importance} />
-                                </div>
-                            )}
+                {/* Roadmap Tab */}
+                {tab === 'roadmap' && (
+                    <div className="animate-slide-up">
+                        <div className="clay-card !p-8">
+                            <RoadmapView studentId={user?.id} />
                         </div>
-                    )}
+                    </div>
+                )}
 
-                    {/* Log Tab */}
-                    {activeTab === 'log' && (
-                        <div className="max-w-2xl animate-slide-up">
-                            <DailyLogForm studentId={user?.id} onSuccess={handleLogSubmit} />
-                        </div>
-                    )}
-
-                    {/* Roadmap Tab */}
-                    {activeTab === 'roadmap' && (
-                        <div className="animate-slide-up">
-                            {data?.roadmap ? (
-                                <RoadmapView roadmap={data.roadmap} />
-                            ) : (
-                                <div className="card text-center py-16">
-                                    <div className="text-5xl mb-4">🗺️</div>
-                                    <p className="text-gray-400 mb-4">No roadmap generated yet</p>
-                                    <button onClick={handleGenerateRoadmap}
-                                        className="bg-gradient-to-r from-neuro-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition">
-                                        Generate Your Roadmap
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    )}
-
-                    {/* Chat Tab */}
-                    {activeTab === 'chat' && (
-                        <div className="max-w-3xl animate-slide-up">
+                {/* Chat Tab */}
+                {tab === 'chat' && (
+                    <div className="max-w-3xl mx-auto animate-slide-up">
+                        <div className="clay-card !p-0 overflow-hidden" style={{ height: '70vh' }}>
                             <ChatAssistant studentId={user?.id} />
                         </div>
-                    )}
+                    </div>
+                )}
 
-                    {/* Simulator Tab */}
-                    {activeTab === 'simulator' && (
-                        <div className="max-w-3xl animate-slide-up">
-                            <Simulator studentId={user?.id} currentPrediction={data?.prediction} />
+                {/* Simulator Tab */}
+                {tab === 'simulator' && (
+                    <div className="max-w-3xl mx-auto animate-slide-up">
+                        <div className="clay-card !p-8">
+                            <Simulator studentId={user?.id} prediction={prediction} />
                         </div>
-                    )}
-                </main>
-            </div>
-        </>
+                    </div>
+                )}
+            </main>
+        </div>
     );
 }

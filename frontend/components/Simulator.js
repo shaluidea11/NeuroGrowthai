@@ -1,19 +1,16 @@
 /**
- * Performance Simulator Component
- * "What if" scenario analysis
+ * Simulator Component (Claymorphism)
  */
 
 import { useState } from 'react';
-import { predictionAPI } from '../services/api';
-import ScoreGauge from './ScoreGauge';
+import api from '../services/api';
 
-export default function Simulator({ studentId, currentPrediction }) {
-    const [adjustments, setAdjustments] = useState({
-        study_hours: 0,
-        problems_solved: 0,
-        mock_score: 0,
-        confidence: 0,
-        mood: 0,
+export default function Simulator({ studentId, prediction }) {
+    const [params, setParams] = useState({
+        study_hours_change: 0,
+        problems_change: 0,
+        confidence_change: 0,
+        mock_score_change: 0,
     });
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -21,97 +18,70 @@ export default function Simulator({ studentId, currentPrediction }) {
     const handleSimulate = async () => {
         setLoading(true);
         try {
-            const res = await predictionAPI.simulate({ student_id: studentId, adjustments });
-            setResult(res.data);
-        } catch (err) {
-            console.error(err);
+            const { data } = await api.simulate({ student_id: studentId, ...params });
+            setResult(data);
+        } catch {
+            alert('Simulation failed');
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     const sliders = [
-        { key: 'study_hours', label: 'Study Hours', min: -4, max: 4, step: 0.5, unit: 'hrs/day', icon: '📚' },
-        { key: 'problems_solved', label: 'Problems Solved', min: -10, max: 20, step: 1, unit: '/day', icon: '🧩' },
-        { key: 'mock_score', label: 'Mock Score Base', min: -20, max: 20, step: 5, unit: 'pts', icon: '📝' },
-        { key: 'confidence', label: 'Confidence', min: -2, max: 2, step: 1, unit: 'level', icon: '💪' },
-        { key: 'mood', label: 'Mood', min: -2, max: 2, step: 1, unit: 'level', icon: '😊' },
+        { key: 'study_hours_change', label: 'Study Hours', icon: '⏱️', min: -4, max: 4, unit: 'hrs' },
+        { key: 'problems_change', label: 'Problems Solved', icon: '🧩', min: -10, max: 10, unit: '' },
+        { key: 'confidence_change', label: 'Confidence', icon: '💪', min: -2, max: 2, unit: '' },
+        { key: 'mock_score_change', label: 'Mock Score', icon: '📊', min: -20, max: 20, unit: 'pts' },
     ];
 
-    const currentScore = currentPrediction?.predicted_score || 50;
-    const simScore = result?.predicted_score || currentScore;
-    const delta = simScore - currentScore;
-
     return (
-        <div className="space-y-6">
-            <div className="card">
-                <h3 className="text-lg font-semibold mb-2">⚡ Performance Simulator</h3>
-                <p className="text-sm text-gray-400 mb-6">
-                    Adjust the sliders to see how changes in your daily routine would affect your predicted score.
-                </p>
+        <div>
+            <h3 className="font-display font-bold text-clay-text text-xl mb-2">🧪 What-If Simulator</h3>
+            <p className="text-clay-subtext text-sm mb-6">Adjust parameters to see how changes affect your predicted score</p>
 
-                <div className="space-y-5">
-                    {sliders.map(s => (
-                        <div key={s.key}>
-                            <div className="flex items-center justify-between text-sm mb-2">
-                                <span className="text-gray-300">{s.icon} {s.label}</span>
-                                <span className={`font-mono font-semibold ${adjustments[s.key] > 0 ? 'text-accent-green' : adjustments[s.key] < 0 ? 'text-accent-red' : 'text-gray-500'}`}>
-                                    {adjustments[s.key] > 0 ? '+' : ''}{adjustments[s.key]} {s.unit}
-                                </span>
-                            </div>
-                            <input type="range" min={s.min} max={s.max} step={s.step} value={adjustments[s.key]}
-                                onChange={e => setAdjustments({ ...adjustments, [s.key]: parseFloat(e.target.value) })}
-                                className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer
-                           [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 
-                           [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-neuro-500 
-                           [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer
-                           [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:shadow-neuro-500/30" />
+            <div className="space-y-5 mb-8">
+                {sliders.map(s => (
+                    <div key={s.key} className="p-4 rounded-2xl bg-clay-bg" style={{ boxShadow: 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff' }}>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-sm font-medium text-clay-text">{s.icon} {s.label}</span>
+                            <span className={`text-sm font-bold ${params[s.key] > 0 ? 'text-accent-green' : params[s.key] < 0 ? 'text-accent-red' : 'text-clay-subtext'}`}>
+                                {params[s.key] > 0 ? '+' : ''}{params[s.key]}{s.unit}
+                            </span>
                         </div>
-                    ))}
-                </div>
-
-                <button onClick={handleSimulate} disabled={loading}
-                    className="w-full mt-6 bg-gradient-to-r from-neuro-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition disabled:opacity-50">
-                    {loading ? 'Simulating...' : '⚡ Run Simulation'}
-                </button>
+                        <input type="range" min={s.min} max={s.max} step={1}
+                            value={params[s.key]}
+                            onChange={e => setParams({ ...params, [s.key]: parseInt(e.target.value) })}
+                            className="w-full h-2 rounded-full appearance-none cursor-pointer accent-clay-accent"
+                            style={{ background: `linear-gradient(to right, #6366f1 0%, #6366f1 ${((params[s.key] - s.min) / (s.max - s.min)) * 100}%, #e2e8f0 ${((params[s.key] - s.min) / (s.max - s.min)) * 100}%, #e2e8f0 100%)` }} />
+                    </div>
+                ))}
             </div>
 
-            {/* Results */}
+            <button onClick={handleSimulate} disabled={loading}
+                className="w-full clay-button-primary !py-4 !text-base mb-6">
+                {loading ? (
+                    <span className="inline-block w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : '🔮 Run Simulation'}
+            </button>
+
             {result && (
-                <div className="card animate-slide-up">
-                    <h4 className="font-semibold mb-4">📊 Simulation Results</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="text-center">
-                            <div className="text-sm text-gray-400 mb-2">New Predicted Score</div>
-                            <ScoreGauge score={simScore} />
+                <div className="clay-card animate-pop !bg-gradient-to-br !from-clay-accent/5 !to-clay-secondary/5">
+                    <h4 className="font-display font-bold text-clay-text mb-4">Simulation Results</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center p-4 rounded-2xl bg-white">
+                            <div className="text-xs text-clay-subtext mb-1">Current</div>
+                            <div className="text-2xl font-bold text-clay-text">{Math.round(prediction?.predicted_score || 0)}</div>
                         </div>
-                        <div className="space-y-4">
-                            <div>
-                                <div className="text-sm text-gray-400">Score Change</div>
-                                <div className={`text-2xl font-bold ${delta > 0 ? 'text-accent-green' : delta < 0 ? 'text-accent-red' : 'text-gray-400'}`}>
-                                    {delta > 0 ? '+' : ''}{delta.toFixed(1)} pts
-                                </div>
-                            </div>
-                            <div>
-                                <div className="text-sm text-gray-400">Burnout Risk</div>
-                                <div className={`text-lg font-semibold ${result.burnout_risk > 0.6 ? 'text-accent-red' : 'text-accent-green'}`}>
-                                    {(result.burnout_risk * 100).toFixed(0)}%
-                                </div>
-                            </div>
+                        <div className="text-center p-4 rounded-2xl bg-white">
+                            <div className="text-xs text-clay-subtext mb-1">Simulated</div>
+                            <div className="text-2xl font-bold text-clay-accent">{Math.round(result.simulated_score || 0)}</div>
                         </div>
-                        <div className="space-y-4">
-                            <div>
-                                <div className="text-sm text-gray-400">Confidence Interval</div>
-                                <div className="text-sm font-medium">
-                                    {result.confidence_lower?.toFixed(1)} – {result.confidence_upper?.toFixed(1)}
-                                </div>
-                            </div>
-                            <div>
-                                <div className="text-sm text-gray-400">Velocity</div>
-                                <div className="text-lg font-semibold text-neuro-400">
-                                    {result.improvement_velocity > 0 ? '+' : ''}{result.improvement_velocity?.toFixed(1)}/day
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    <div className="text-center mt-4">
+                        <span className={`text-lg font-bold ${(result.simulated_score - (prediction?.predicted_score || 0)) >= 0 ? 'text-accent-green' : 'text-accent-red'}`}>
+                            {(result.simulated_score - (prediction?.predicted_score || 0)) >= 0 ? '📈 +' : '📉 '}
+                            {(result.simulated_score - (prediction?.predicted_score || 0)).toFixed(1)} points
+                        </span>
                     </div>
                 </div>
             )}
