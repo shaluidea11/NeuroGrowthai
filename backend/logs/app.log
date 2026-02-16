@@ -8,3 +8,151 @@
 2026-02-16 14:02:18.101 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
 2026-02-16 14:02:18.104 | INFO     | main:lifespan:28 - ✅ Database initialized
 2026-02-16 14:07:00.372 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 14:46:03.821 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 14:46:03.826 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 14:56:36.825 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 14:56:46.618 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 14:56:46.620 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 14:56:56.535 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 14:56:56.538 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 14:57:06.549 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 14:57:06.551 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:02:42.088 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 15:02:51.945 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:02:51.947 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:07:16.644 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 15:07:26.594 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:07:26.596 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:12:38.653 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 15:12:48.739 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:12:48.743 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:13:06.821 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 15:13:17.321 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:13:17.323 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:13:26.854 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:13:26.857 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:13:36.611 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:13:36.614 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:17:24.316 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 15:17:34.239 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:17:34.241 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:19:18.390 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 15:19:28.675 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:19:28.677 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:19:48.293 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:19:48.295 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:20:41.345 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/auth/login
+2026-02-16 15:20:41.439 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:20:43.358 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/auth/login
+2026-02-16 15:20:43.390 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:21:37.295 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/auth/login
+2026-02-16 15:21:37.336 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:24:05.281 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/auth/login
+2026-02-16 15:24:05.313 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:26:02.176 | INFO     | main:lifespan:30 - 🛑 Shutting down NeuroGrowth AI Backend
+2026-02-16 15:26:18.334 | INFO     | main:lifespan:24 - 🚀 Starting NeuroGrowth AI Backend...
+2026-02-16 15:26:18.336 | INFO     | main:lifespan:28 - ✅ Database initialized
+2026-02-16 15:27:06.886 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/auth/login
+2026-02-16 15:27:07.061 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:27:08.897 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:27:08.916 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:27:08.922 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:27:08.937 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:27:08.953 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:27:09.017 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:27:09.022 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:27:09.047 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:27:35.127 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:27:35.148 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:27:35.155 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:27:35.165 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:27:35.178 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:27:35.183 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:27:35.196 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:27:35.198 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:28:44.034 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/log-daily
+2026-02-16 15:28:44.047 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:30:11.041 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/log-daily
+2026-02-16 15:30:11.100 | INFO     | main:log_requests:46 - Response status: 201
+2026-02-16 15:30:16.746 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:30:16.754 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:30:16.758 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:30:16.767 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:30:16.778 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:30:16.801 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:30:16.807 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:30:16.830 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:30:29.365 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:30:29.371 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:30:29.379 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:30:29.392 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:30:29.398 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:30:29.407 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:30:29.416 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:30:29.424 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:32:57.895 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/predict/2
+2026-02-16 15:32:57.909 | WARNING  | models.inference:load_model:24 - No trained model found, using untrained model
+2026-02-16 15:32:58.051 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:35:40.467 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:35:40.510 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:35:40.544 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:35:40.616 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:35:40.657 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:35:40.697 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:35:40.734 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:35:40.775 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:35:43.379 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:35:43.382 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:35:43.399 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:35:43.410 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:35:43.418 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:35:43.430 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:35:43.444 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:35:43.454 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:35:43.458 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/3
+2026-02-16 15:35:43.498 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:35:43.508 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:35:43.519 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:37:49.383 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:37:49.395 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:37:49.402 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:37:49.415 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:37:49.420 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:37:49.426 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:37:49.431 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:37:49.437 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:37:55.665 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:37:55.674 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:37:55.684 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:37:55.691 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:37:55.700 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:37:55.706 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:37:55.715 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:37:55.722 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:38:08.140 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:38:08.150 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:38:08.158 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:38:08.173 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:38:08.178 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:38:08.186 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:38:08.192 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:38:08.204 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:38:59.452 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:38:59.457 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:38:59.464 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:38:59.473 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:38:59.484 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:38:59.494 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:38:59.508 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:38:59.522 | INFO     | main:log_requests:46 - Response status: 422
+2026-02-16 15:39:29.621 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/dashboard/2
+2026-02-16 15:39:29.640 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:40:30.614 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/auth/login
+2026-02-16 15:40:30.661 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:40:32.691 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/auth/me
+2026-02-16 15:40:32.697 | INFO     | main:log_requests:46 - Response status: 200
+2026-02-16 15:41:06.423 | INFO     | main:log_requests:44 - Incoming request: GET http://localhost:8000/roadmap/3
+2026-02-16 15:41:06.429 | INFO     | main:log_requests:46 - Response status: 404
+2026-02-16 15:41:08.454 | INFO     | main:log_requests:44 - Incoming request: POST http://localhost:8000/generate-roadmap
+2026-02-16 15:41:08.464 | INFO     | services.roadmap_engine:generate_roadmap:31 - Generating roadmap: score=50.0, goal=DevOps Engineer, style=Consistent Learner
+2026-02-16 15:41:08.514 | INFO     | main:log_requests:46 - Response status: 200

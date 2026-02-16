@@ -4,7 +4,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import api from '../services/api';
+import { authAPI as api } from '../services/api';
 
 export default function Home() {
     const router = useRouter();
@@ -19,16 +19,24 @@ export default function Home() {
         setLoading(true);
         try {
             if (isLogin) {
-                const { data } = await api.login(form.email, form.password);
+                const { data } = await api.login({ email: form.email, password: form.password });
                 localStorage.setItem('token', data.access_token);
             } else {
                 await api.register(form);
-                const { data } = await api.login(form.email, form.password);
+                const { data } = await api.login({ email: form.email, password: form.password });
                 localStorage.setItem('token', data.access_token);
             }
             router.push('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.detail || 'Something went wrong');
+            console.error("Login Fatal Error:", err);
+            const detail = err.response?.data?.detail;
+            if (Array.isArray(detail)) {
+                setError(detail.map(d => d.msg).join(', '));
+            } else if (typeof detail === 'string') {
+                setError(detail);
+            } else {
+                setError(err.message || 'Something went wrong');
+            }
         } finally {
             setLoading(false);
         }

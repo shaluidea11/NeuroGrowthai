@@ -18,6 +18,7 @@ import FeatureImportance from '../components/FeatureImportance';
 const TABS = [
     { id: 'overview', icon: '🏠', label: '🏠 Overview' },
     { id: 'log', icon: '📝', label: '📝 Daily Log' },
+    { id: 'history', icon: '📋', label: '📋 Log History' },
     { id: 'roadmap', icon: '🗺️', label: '🗺️ Roadmap' },
     { id: 'chat', icon: '💬', label: '💬 Assistant' },
     { id: 'simulator', icon: '🧪', label: '🧪 Simulator' },
@@ -68,7 +69,7 @@ export default function Dashboard() {
     }
 
     const prediction = dashboard?.prediction;
-    const logs = dashboard?.logs || [];
+    const logs = dashboard?.daily_logs || [];
 
     return (
         <div className="min-h-screen bg-clay-bg">
@@ -139,6 +140,78 @@ export default function Dashboard() {
                         <div className="clay-card !p-8">
                             <h3 className="font-display font-bold text-clay-text text-xl mb-6">📝 Log Today's Progress</h3>
                             <DailyLogForm studentId={user?.id} onSuccess={() => window.location.reload()} />
+                        </div>
+                    </div>
+                )}
+
+                {/* Log History Tab */}
+                {tab === 'history' && (
+                    <div className="animate-slide-up">
+                        <div className="clay-card !p-6">
+                            <div className="flex items-center justify-between mb-6">
+                                <h3 className="font-display font-bold text-clay-text text-xl">📋 Past Log Entries</h3>
+                                <span className="text-sm text-clay-subtext bg-clay-bg px-3 py-1 rounded-full" style={{ boxShadow: 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff' }}>
+                                    {logs.length} entries
+                                </span>
+                            </div>
+                            {logs.length === 0 ? (
+                                <div className="text-center py-12">
+                                    <div className="text-5xl mb-4">📭</div>
+                                    <p className="text-clay-subtext">No log entries yet. Start by logging your daily progress!</p>
+                                </div>
+                            ) : (
+                                <div className="overflow-x-auto rounded-2xl" style={{ boxShadow: 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff' }}>
+                                    <table className="w-full text-sm">
+                                        <thead>
+                                            <tr className="bg-clay-bg/80">
+                                                <th className="text-left px-4 py-3 text-xs font-semibold text-clay-subtext uppercase tracking-wide">Date</th>
+                                                <th className="text-center px-4 py-3 text-xs font-semibold text-clay-subtext uppercase tracking-wide">Study Hrs</th>
+                                                <th className="text-center px-4 py-3 text-xs font-semibold text-clay-subtext uppercase tracking-wide">Problems</th>
+                                                <th className="text-center px-4 py-3 text-xs font-semibold text-clay-subtext uppercase tracking-wide">Mock Score</th>
+                                                <th className="text-center px-4 py-3 text-xs font-semibold text-clay-subtext uppercase tracking-wide">Confidence</th>
+                                                <th className="text-center px-4 py-3 text-xs font-semibold text-clay-subtext uppercase tracking-wide">Mood</th>
+                                                <th className="text-center px-4 py-3 text-xs font-semibold text-clay-subtext uppercase tracking-wide">Skill</th>
+                                                <th className="text-center px-4 py-3 text-xs font-semibold text-clay-subtext uppercase tracking-wide">Revised</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {logs.map((log, i) => {
+                                                const moodEmojis = ['😰', '😟', '😐', '🙂', '😊'];
+                                                const confColors = ['bg-red-100 text-red-700', 'bg-orange-100 text-orange-700', 'bg-yellow-100 text-yellow-700', 'bg-blue-100 text-blue-700', 'bg-green-100 text-green-700'];
+                                                return (
+                                                    <tr key={i} className="border-t border-gray-100 hover:bg-clay-bg/40 transition-colors">
+                                                        <td className="px-4 py-3 font-medium text-clay-text whitespace-nowrap">
+                                                            {new Date(log.date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
+                                                        </td>
+                                                        <td className="px-4 py-3 text-center">
+                                                            <span className="font-bold text-clay-accent">{log.study_hours}h</span>
+                                                        </td>
+                                                        <td className="px-4 py-3 text-center text-clay-text font-medium">{log.problems_solved}</td>
+                                                        <td className="px-4 py-3 text-center">
+                                                            <span className={`px-2 py-1 rounded-lg text-xs font-bold ${log.mock_score >= 70 ? 'bg-green-100 text-green-700' :
+                                                                    log.mock_score >= 40 ? 'bg-yellow-100 text-yellow-700' :
+                                                                        'bg-red-100 text-red-700'
+                                                                }`}>{log.mock_score ?? '—'}</span>
+                                                        </td>
+                                                        <td className="px-4 py-3 text-center">
+                                                            <span className={`px-2 py-1 rounded-lg text-xs font-bold ${confColors[(log.confidence || 1) - 1]}`}>
+                                                                {log.confidence}/5
+                                                            </span>
+                                                        </td>
+                                                        <td className="px-4 py-3 text-center text-lg">{moodEmojis[(log.mood || 1) - 1]}</td>
+                                                        <td className="px-4 py-3 text-center">
+                                                            <span className="px-2 py-1 rounded-full text-xs font-medium bg-clay-accent/10 text-clay-accent">
+                                                                {log.skill_practiced || 'Other'}
+                                                            </span>
+                                                        </td>
+                                                        <td className="px-4 py-3 text-center text-lg">{log.revision_done ? '✅' : '❌'}</td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}

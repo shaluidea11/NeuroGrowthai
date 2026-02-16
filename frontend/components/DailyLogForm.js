@@ -18,7 +18,7 @@ export default function DailyLogForm({ studentId, onSuccess }) {
         e.preventDefault();
         setSubmitting(true);
         try {
-            await api.createLog(form);
+            await api.createLog({ ...form, student_id: studentId });
             setSuccess(true);
             setTimeout(() => { setSuccess(false); onSuccess?.(); }, 2000);
         } catch (err) {
@@ -46,8 +46,8 @@ export default function DailyLogForm({ studentId, onSuccess }) {
                     <button key={v} type="button"
                         onClick={() => onChange(v)}
                         className={`w-10 h-10 rounded-xl text-sm font-bold transition-all duration-200 ${v <= value
-                                ? 'bg-clay-accent text-white shadow-lg shadow-indigo-200'
-                                : 'bg-clay-bg text-clay-subtext'
+                            ? 'bg-clay-accent text-white shadow-lg shadow-indigo-200'
+                            : 'bg-clay-bg text-clay-subtext'
                             }`}
                         style={v > value ? { boxShadow: 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff' } : {}}>
                         {v}
@@ -106,8 +106,8 @@ export default function DailyLogForm({ studentId, onSuccess }) {
                         <button key={s.value} type="button"
                             onClick={() => setForm({ ...form, skill_practiced: s.value })}
                             className={`px-4 py-2 rounded-2xl text-sm font-medium transition-all duration-200 ${form.skill_practiced === s.value
-                                    ? 'bg-clay-accent text-white shadow-lg shadow-indigo-200'
-                                    : 'bg-clay-bg text-clay-subtext hover:text-clay-text'
+                                ? 'bg-clay-accent text-white shadow-lg shadow-indigo-200'
+                                : 'bg-clay-bg text-clay-subtext hover:text-clay-text'
                                 }`}
                             style={form.skill_practiced !== s.value ? { boxShadow: '3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff' } : {}}>
                             {s.label}

@@ -18,7 +18,15 @@ export default function Simulator({ studentId, prediction }) {
     const handleSimulate = async () => {
         setLoading(true);
         try {
-            const { data } = await api.simulate({ student_id: studentId, ...params });
+            const { data } = await api.simulate({
+                student_id: studentId,
+                adjustments: {
+                    study_hours: params.study_hours_change,
+                    problems_solved: params.problems_change,
+                    confidence: params.confidence_change,
+                    mock_score: params.mock_score_change,
+                }
+            });
             setResult(data);
         } catch {
             alert('Simulation failed');
@@ -74,13 +82,13 @@ export default function Simulator({ studentId, prediction }) {
                         </div>
                         <div className="text-center p-4 rounded-2xl bg-white">
                             <div className="text-xs text-clay-subtext mb-1">Simulated</div>
-                            <div className="text-2xl font-bold text-clay-accent">{Math.round(result.simulated_score || 0)}</div>
+                            <div className="text-2xl font-bold text-clay-accent">{Math.round(result.predicted_score || 0)}</div>
                         </div>
                     </div>
                     <div className="text-center mt-4">
-                        <span className={`text-lg font-bold ${(result.simulated_score - (prediction?.predicted_score || 0)) >= 0 ? 'text-accent-green' : 'text-accent-red'}`}>
-                            {(result.simulated_score - (prediction?.predicted_score || 0)) >= 0 ? '📈 +' : '📉 '}
-                            {(result.simulated_score - (prediction?.predicted_score || 0)).toFixed(1)} points
+                        <span className={`text-lg font-bold ${(result.predicted_score - (prediction?.predicted_score || 0)) >= 0 ? 'text-accent-green' : 'text-accent-red'}`}>
+                            {(result.predicted_score - (prediction?.predicted_score || 0)) >= 0 ? '📈 +' : '📉 '}
+                            {(result.predicted_score - (prediction?.predicted_score || 0)).toFixed(1)} points
                         </span>
                     </div>
                 </div>

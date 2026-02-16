@@ -25,7 +25,7 @@ export default function ChatAssistant({ studentId }) {
         setLoading(true);
 
         try {
-            const { data } = await api.chatAssistant(studentId, text);
+            const { data } = await api.chatAssistant({ student_id: studentId, message: text });
             setMessages(prev => [...prev, { role: 'bot', text: data.response }]);
         } catch {
             setMessages(prev => [...prev, { role: 'bot', text: "Sorry, I couldn't process that. Please try again." }]);

@@ -14,11 +14,11 @@ export default function RoadmapView({ studentId }) {
         const fetchRoadmap = async () => {
             try {
                 const { data } = await api.getRoadmap(studentId);
-                setRoadmap(data);
+                setRoadmap(data.roadmap || data);
             } catch {
                 try {
-                    const { data } = await api.generateRoadmap(studentId);
-                    setRoadmap(data);
+                    const { data } = await api.generateRoadmap({ student_id: studentId });
+                    setRoadmap(data.roadmap || data);
                 } catch { }
             } finally {
                 setLoading(false);
@@ -68,8 +68,8 @@ export default function RoadmapView({ studentId }) {
                     <button key={i}
                         onClick={() => setSelectedWeek(i)}
                         className={`px-5 py-2.5 rounded-2xl text-sm font-medium transition-all ${selectedWeek === i
-                                ? 'bg-clay-accent text-white shadow-lg shadow-indigo-200'
-                                : 'bg-clay-bg text-clay-subtext'
+                            ? 'bg-clay-accent text-white shadow-lg shadow-indigo-200'
+                            : 'bg-clay-bg text-clay-subtext'
                             }`}
                         style={selectedWeek !== i ? { boxShadow: '4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff' } : {}}>
                         Week {i + 1}
